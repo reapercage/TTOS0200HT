@@ -12,9 +12,12 @@ namespace PTDECon
         {
             bool[] hp = new bool[7];
             Harjoitusohjelma hj1 = new Harjoitusohjelma();
+            //hj1.AsetaAloituspäivä(2017-03-23);
             hj1.Nimi = "empty";
             Console.WriteLine("Harjoitusohjelma\n----------------");
             Console.WriteLine("\nNimi: " + hj1.Nimi );
+            Console.WriteLine("Aloituspäivä: ");
+            hj1.Aloituspäivä();
             Console.WriteLine("Monijakoinen: " + hj1.Monijakoinen);
             Console.WriteLine("Harjoituspäivät:");
             for (int k = 0; k < hj1.LaskeHarjoitusviikot(); k++)

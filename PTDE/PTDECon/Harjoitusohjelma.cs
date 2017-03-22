@@ -10,12 +10,18 @@ namespace PTDECon
     {
         private DateTime aloituspaiva;
         private string nimi = "Harjoitusohjelma"; // + counter 1
-        private string currentTrainingDay;
-        private string currentTrainingWeek;
+        private int currentTrainingDay = 1;
+        private int currentTrainingWeek = 1;
         private int monijakoinen = 1;
         private List<bool[]> harjoituspäivät;
-        private List<Harjoite> harjoite;
+        private List<Harjoite> harjoitteet;
 
+        public Harjoitusohjelma()
+        {
+            aloituspaiva = DateTime.Today;
+            harjoituspäivät = new List<bool[]>();
+            LisääHarjViikko();
+        }
         public string Nimi
         {
             get
@@ -38,14 +44,13 @@ namespace PTDECon
                 monijakoinen = value;
             }
         }
-        public Harjoitusohjelma()
+        public void Aloituspäivä()
         {
-            harjoituspäivät = new List<bool[]>();
-            LisääHarjViikko();
-            //for(int i = 0; i < 7; i++)
-            //{
-            //    harjoituspäivät[0][i] = false;
-            //}
+            Console.WriteLine(aloituspaiva);
+        }
+        public void AsetaAloituspäivä(DateTime ap)
+        {
+            aloituspaiva = ap;
         }
         public bool OnkoHarjoituspäivä(int ind1, int ind2)
         {
