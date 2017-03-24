@@ -8,25 +8,191 @@ namespace PTDECon
 {
     class Harjoite
     {
-        private int paivacounter = 0;
-        private bool[] jako = new bool[7];
-        private double painojenMuutosD = 0;
-        private double painojenMuutosSarja = 0;
-        List<Sarja> sarjat = new List<Sarja>();
+        private string nimi;
+        private int paivacounter;
+        private bool[] jako;
+        private double lahtopainot;
+        private double painojenMuutosD;
+        private double painojenMuutosSarja;
+        private int montaSarjaa;
+        public List<Sarja> sarjat;
+        private int index;
 
-        public void LisaaSarja(Sarja srj)
+        public Harjoite()
         {
-            sarjat.Add(srj);
+            nimi = "empty";
+            paivacounter = 0;
+            jako = new bool[7];
+            lahtopainot = 0;
+            painojenMuutosD = 0;
+            painojenMuutosSarja = 0;
+            montaSarjaa = 0;
+            sarjat = new List<Sarja>();
+            LisaaSarja();
         }
-        public void PoistaSarja(int index)
+        //harjoitteen nimi listasta tai custom
+        public string Nimi
         {
-            sarjat.RemoveAt(index);
+            get
+            {
+                return nimi;
+            }
+            set
+            {
+                nimi = value;
+            }
+        }
+        public int MontaSarjaa
+        {
+            get
+            {
+                return montaSarjaa;
+            }
+            set
+            {
+                montaSarjaa = value;
+            }
+        }
+        public double AsetaLahtopainot
+        {
+            get
+            {
+                return lahtopainot;
+            }
+            set
+            {
+                lahtopainot = value;
+            }
+        }
+        public void AsetaJakoisuus(int jakoisuus)
+        {
+            jako = new bool[jakoisuus];
+        }
+        public void AsetaHarjoitusjako(int index)
+        {
+            jako[index] = true;
+        }
+        public void PoistaHarjoitusjako(int index)
+        {
+            jako[index] = false;
+        }
+        public double PainojenmuutosPerD
+        {
+            get
+            {
+                return painojenMuutosD;
+            }
+            set
+            {
+                painojenMuutosD = value;
+            }
+        }
+        public double PainojenmuutosPerSarja
+        {
+            get
+            {
+                return painojenMuutosSarja;
+            }
+            set
+            {
+                painojenMuutosSarja = value;
+            }
+        }
+        //public void reset
+        //muuta sarjojen painoja
+        //muuta sarjojen toistoja
+        //tehdyt harjoituspäivät sarjoineen ja painoineen
+        public void KerääSarjat()
+        {
+            
+        }
+        public void LisaaSarja()
+        {
+            Sarja srj = new Sarja();
+            sarjat.Add(srj);
+            montaSarjaa++;
+        }
+        public void PoistaSarja(int index, bool laskuri)
+        {
+            if(sarjat.Count > 1)
+            {
+                sarjat.RemoveAt(index);
+                if(laskuri == false) montaSarjaa--;
+            }
+            //if vain yksi sarja, ei edes poista painiketta
+        }
+        public int LaskeSarjat()
+        {
+            return sarjat.Count;
+        }
+        public void TarkistaSarjaLkm(Harjoite hrj)
+        {
+            if (hrj.MontaSarjaa > hrj.sarjat.Count)
+            {
+                for (int i = 0; i < hrj.MontaSarjaa - hrj.sarjat.Count; i++)
+                {
+                    hrj.LisaaSarja();
+                    hrj.montaSarjaa--;
+                }
+                //tallenna johonkin väliaikaisesti
+            }
+            else if (hrj.MontaSarjaa < hrj.sarjat.Count)
+            {
+                //tallenna johonkin väliaikaisesti ennen poistoa
+                //oldSarjat = currentSarjat
+                //jonka jälkeen
+                for (int i = hrj.sarjat.Count; i > hrj.MontaSarjaa; i--)
+                {
+                    hrj.PoistaSarja(i - 1, true);
+                }
+
+            }
+        }
+        public void MuutaSarjaPainot(int index, double painot)
+        {
+            sarjat[index].Painot = painot;
+        }
+        public void MuutaSarjaToistot(int index, int toistot)
+        {
+            sarjat[index].Toistot = toistot;
         }
     }
+    //wpf lista painojen korotuksista ja toistoista, oma luokka?
     class Sarja
     {
-        private double lahtopainot;
         private double painot;
         private int toistot;
+
+        public Sarja()
+        {
+            painot = 0;
+            toistot = 1;
+        }
+        public double Painot
+        {
+            get
+            {
+                return painot;
+            }
+            set
+            {
+                painot = value;
+            }
+        }
+        public int Toistot
+        {
+            get
+            {
+                return toistot;
+            }
+            set
+            {
+                toistot = value;
+            }
+        }
+    }
+    class Painot
+    {
+        //korotus 1.25 * 2 * 4 = 10
     }
 }

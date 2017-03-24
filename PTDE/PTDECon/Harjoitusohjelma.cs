@@ -12,15 +12,20 @@ namespace PTDECon
         private string nimi = "Harjoitusohjelma"; // + counter 1
         private int currentTrainingDay = 1;
         private int currentTrainingWeek = 1;
-        private int monijakoinen = 1;
+        private int monijakoinen;
         private List<bool[]> harjoituspäivät;
-        private List<Harjoite> harjoitteet;
-
+        public List<Harjoite> harjoitteet;
+        private int sarjaNroTemp = 0;
+        //public void reset
         public Harjoitusohjelma()
         {
             aloituspaiva = DateTime.Today;
             harjoituspäivät = new List<bool[]>();
-            LisääHarjViikko();
+            LisääHarjoitusviikko();
+            monijakoinen = 1;
+            harjoitteet = new List<Harjoite>();
+            Harjoite harjoite = new Harjoite();
+            harjoitteet.Add(harjoite);
         }
         public string Nimi
         {
@@ -33,6 +38,7 @@ namespace PTDECon
                 nimi = value;
             }
         }
+        //if monijakoinen = 3 => 1 : harjoite jako = 1, remember jako 3?
         public int Monijakoinen
         {
             get
@@ -52,21 +58,63 @@ namespace PTDECon
         {
             aloituspaiva = ap;
         }
-        public bool OnkoHarjoituspäivä(int ind1, int ind2)
+
+        //Harjoitusviikot
+        public void LisääHarjoitusviikko()
         {
-            return harjoituspäivät[ind1][ind2];
+            harjoituspäivät.Add(new bool[7]);
         }
-        public void LisääHarjViikko()
+        public void PoistaHarjoitusviikko(int index)
         {
-            harjoituspäivät.Add(new bool[7]); 
-        }
-        public void PoistaHarjViikko(int index)
-        {
+            if(harjoituspäivät.Count != 0)
             harjoituspäivät.RemoveAt(index);
         }
         public int LaskeHarjoitusviikot()
         {
             return harjoituspäivät.Count;
+        }
+        //Harjoituspäivät
+        public void AsetaHarjoituspäivä(int ind1, int ind2)
+        {
+            harjoituspäivät[ind1][ind2] = true;
+        }
+        public void PoistaHarjoituspäivä(int ind1, int ind2)
+        {
+            harjoituspäivät[ind1][ind2] = false;
+        }
+        public bool OnkoHarjoituspäivä(int ind1, int ind2)
+        {
+            return harjoituspäivät[ind1][ind2];
+        }
+        //Harjoitteet
+        //harjoitteiden selaus
+        //tuple
+        //http://stackoverflow.com/questions/748062/how-can-i-return-multiple-values-from-a-function-in-c
+        public void NäytäHarjoitteet()
+        {
+            foreach(Harjoite h in harjoitteet)
+            {
+                sarjaNroTemp = 1;
+                Console.WriteLine("Nimi: " + h.Nimi);
+                Console.WriteLine("Sarjojen lukumäärä: " + h.MontaSarjaa);
+                foreach(Sarja s in h.sarjat)
+                {
+                    Console.WriteLine("Sarja " + sarjaNroTemp + ":");
+                    Console.WriteLine("Painot: " + s.Painot
+                                        + " Toistot: " + s.Toistot);
+                    sarjaNroTemp++;
+                }
+            }
+        }
+        public void LisääHarjoite()
+        {
+            Harjoite harjoite = new Harjoite();
+            harjoitteet.Add(harjoite);
+        }
+        public void PoistaHarjoite(int index)
+        {
+            if (harjoitteet.Count > 1)
+                harjoitteet.RemoveAt(index);
         }
     }
 }
