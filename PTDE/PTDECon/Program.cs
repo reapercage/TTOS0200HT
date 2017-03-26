@@ -13,18 +13,37 @@ namespace PTDECon
             bool[] hp = new bool[7];
             Harjoitusohjelma hj1 = new Harjoitusohjelma();
             //Testisyöte
-            //Lisää harjoite button, toimii
+            //Aseta harjoitusohjelman nimi, toimii
+            hj1.Nimi = "Schwarzeneggerin 6 osainen";
+            //Aseta harjoitusohjelman jakoisuus toimii
+            hj1.Monijakoinen = 2;
+            //Lisää harjoite, toimii
             hj1.LisääHarjoite();
-            //Lisää sarja button, toimii
+            //Lisää sarja, toimii
             hj1.harjoitteet[0].LisaaSarja();
             hj1.harjoitteet[0].LisaaSarja();
             hj1.harjoitteet[0].LisaaSarja();
             //Monta sarjaa Droplist, toimii
             hj1.harjoitteet[0].MontaSarjaa = 3;
-            //Poista sarja button, toimii
+            //Poista sarja, toimii
             hj1.harjoitteet[0].PoistaSarja(hj1.harjoitteet[0].sarjat.Count - 1, false);
             //Monta sarjaa Droplist2, toimii
             hj1.harjoitteet[0].TarkistaSarjaLkm(hj1.harjoitteet[0]);
+            //Aseta ja poista harjoitusjako, toimii
+            //Kun harjoitusohjelman jakoisuutta muutetaan, muuttuvat myös
+            //harjoitteiden jakoisuudet
+            //Aseta jakoisuus voidaan korvata myös bool[16]
+            //ja jakoisuudet näkyvät ja ovat käytössä hj1.Monijakoinen mukaan
+            hj1.harjoitteet[0].AsetaJakoisuus(hj1.Monijakoinen);
+            hj1.harjoitteet[1].AsetaJakoisuus(hj1.Monijakoinen);
+            hj1.harjoitteet[0].AsetaHarjoitusjako(0);
+            hj1.harjoitteet[0].AsetaHarjoitusjako(1);
+            hj1.harjoitteet[0].PoistaHarjoitusjako(1);
+            hj1.harjoitteet[1].AsetaHarjoitusjako(1);
+            //jakoisuus testi
+            hj1.Monijakoinen = 1;
+            //Harjoitus aktiivinen - ei ?
+
             //Aseta harjoituspäivä click toimii
             hj1.AsetaHarjoituspäivä(0, 0);
             hj1.AsetaHarjoituspäivä(0, 2);
@@ -33,11 +52,20 @@ namespace PTDECon
             hj1.PoistaHarjoituspäivä(0, 5);
             hj1.AsetaHarjoituspäivä(0, 4);
             hj1.AsetaHarjoituspäivä(0, 6);
-            //Lisää harjoitusviikko
-
+            //Lisää harjoitusviikko toimii
+            hj1.LisääHarjoitusviikko();
+            hj1.AsetaHarjoituspäivä(1, 1);
+            hj1.AsetaHarjoituspäivä(1, 3);
+            hj1.AsetaHarjoituspäivä(1, 5);
+            hj1.LisääHarjoitusviikko();
+            //Poista harjoitusviikko toimii
+            hj1.PoistaHarjoitusviikko(2);
             //method siirrä harjoituspäivä
-            //hj1.AsetaAloituspäivä(2017-03-23);
-            //hj1.Nimi = "empty";
+            //Aseta aloituspäivä
+            //Aseta harjoituksen jakoisuus
+            //Muuta sarjojen painoja
+            //Auto_increase
+            //Muuta sarjojen toistoja
 
 
 
@@ -52,7 +80,7 @@ namespace PTDECon
             {
                 for (int i = 0; i < 7; i++)
                 {
-                    if (hj1.OnkoHarjoituspäivä(0, i))
+                    if (hj1.OnkoHarjoituspäivä(k, i))
                     {
                         Console.Write("[x]");
                     }
@@ -61,6 +89,7 @@ namespace PTDECon
                         Console.Write("[ ]");
                     }
                 }
+                Console.Write("\n");
             }
             Console.WriteLine("\n\nHarjoitteet:");
             hj1.NäytäHarjoitteet();

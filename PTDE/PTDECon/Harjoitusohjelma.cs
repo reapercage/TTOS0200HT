@@ -9,7 +9,7 @@ namespace PTDECon
     class Harjoitusohjelma
     {
         private DateTime aloituspaiva;
-        private string nimi = "Harjoitusohjelma"; // + counter 1
+        private string nimi; // + counter 1
         private int currentTrainingDay = 1;
         private int currentTrainingWeek = 1;
         private int monijakoinen;
@@ -20,6 +20,7 @@ namespace PTDECon
         public Harjoitusohjelma()
         {
             aloituspaiva = DateTime.Today;
+            nimi = "Harjoitusohjelma"; // counter +1
             harjoituspäivät = new List<bool[]>();
             LisääHarjoitusviikko();
             monijakoinen = 1;
@@ -96,6 +97,19 @@ namespace PTDECon
             {
                 sarjaNroTemp = 1;
                 Console.WriteLine("Nimi: " + h.Nimi);
+                Console.WriteLine("Harjoituspäivät: ");
+                for(int i = 0; i < monijakoinen; i++)
+                {
+                    if(h.TarkistaOnkoHp(i))
+                    {
+                        Console.Write("[X]");
+                    }
+                    else
+                    {
+                        Console.Write("[ ]");
+                    }
+                }
+                Console.WriteLine();
                 Console.WriteLine("Sarjojen lukumäärä: " + h.MontaSarjaa);
                 foreach(Sarja s in h.sarjat)
                 {

@@ -64,6 +64,10 @@ namespace PTDECon
                 lahtopainot = value;
             }
         }
+        public bool TarkistaOnkoHp(int index)
+        {
+            return jako[index];
+        }
         public void AsetaJakoisuus(int jakoisuus)
         {
             jako = new bool[jakoisuus];
