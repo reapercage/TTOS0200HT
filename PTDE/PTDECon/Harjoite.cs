@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace PTDECon
 {
+    //harjoituskerta
     class Harjoite
     {
         private string nimi;
         private int paivacounter;
         private bool[] jako;
         private double lahtopainot;
+        private bool autoPainojenMuutosD;
+        private bool autoPainojenMuutosSarja;
         private double painojenMuutosD;
         private double painojenMuutosSarja;
         private int montaSarjaa;
@@ -198,5 +201,16 @@ namespace PTDECon
     class Painot
     {
         //korotus 1.25 * 2 * 4 = 10
+    }
+    class HarjoiteNimi
+    {
+        public string[] harjoitukset = new string[]
+            { "Penkkipunnerrus", "Maastaveto", "Rinnalleveto",
+            "Pystypunnerrus", "Ylätalja", "Alatalja",
+            "Vatsalihakset", "Vatsalihaslaite", "Selkälihakset",
+            "Soutulaite", "Reisilihaslaite", "Kääntölaite",
+            "Käsipainot - hauis", "Käsipainot - hauiskääntö",
+            "Käsipainot - pystypunnerrus", "Käsipainot - veto",
+            "Tanko - hauikset", "Leukojenveto", "Custom" };
     }
 }
