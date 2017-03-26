@@ -43,6 +43,8 @@ namespace PTDECon
             //jakoisuus testi
             hj1.Monijakoinen = 1;
             //Harjoitus aktiivinen - ei ?
+            //Aseta lähtöpainot
+            hj1.harjoitteet[0].Lahtopainot = 10;
 
             //Aseta harjoituspäivä click toimii
             hj1.AsetaHarjoituspäivä(0, 0);

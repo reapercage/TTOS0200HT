@@ -110,6 +110,7 @@ namespace PTDECon
                     }
                 }
                 Console.WriteLine();
+                Console.WriteLine("Lähtöpainot: " + h.Lahtopainot);
                 Console.WriteLine("Sarjojen lukumäärä: " + h.MontaSarjaa);
                 foreach(Sarja s in h.sarjat)
                 {

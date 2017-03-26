@@ -23,7 +23,6 @@ namespace PTDECon
 
         public Harjoite()
         {
-            nimi = "empty";
             paivacounter = 0;
             jako = new bool[7];
             lahtopainot = 0;
@@ -56,7 +55,7 @@ namespace PTDECon
                 montaSarjaa = value;
             }
         }
-        public double AsetaLahtopainot
+        public double Lahtopainot
         {
             get
             {
