@@ -27,6 +27,7 @@ namespace PTDECon
             hj1.harjoitteet[0].MontaSarjaa = 3;
             //Poista sarja, toimii
             hj1.harjoitteet[0].PoistaSarja(hj1.harjoitteet[0].sarjat.Count - 1, false);
+            hj1.harjoitteet[0].MontaSarjaa = 3;
             //Monta sarjaa Droplist2, toimii
             hj1.harjoitteet[0].TarkistaSarjaLkm(hj1.harjoitteet[0]);
             //Aseta ja poista harjoitusjako, toimii
@@ -65,9 +66,19 @@ namespace PTDECon
             //method siirrä harjoituspäivä
             //Aseta aloituspäivä
             //Aseta harjoituksen jakoisuus
-            //Muuta sarjojen painoja
             //Auto_increase
             //Muuta sarjojen toistoja
+
+            //Asetetaan harjoitusohjelma aktiiviseksi
+            hj1.Aktiivinen = true;
+            //Muuta sarjojen painoja
+            hj1.harjoitteet[0].MuutaSarjaPainot(0, 10);
+            //3 sarjaa tällä hetkellä
+            //Automaattinen painojen muutos per sarja
+            hj1.harjoitteet[0].PainojenmuutosPerSarja = 2.5;
+            //if painojenmuutospersarja has changed -->
+            hj1.harjoitteet[0].MuutaSarjaPainot(1, hj1.harjoitteet[0].sarjat[0].Painot
+                + hj1.harjoitteet[0].PainojenmuutosPerSarja);
 
 
 
@@ -95,6 +106,9 @@ namespace PTDECon
             }
             Console.WriteLine("\n\nHarjoitteet:");
             hj1.NäytäHarjoitteet();
+            Console.WriteLine("\n\n\n\n");
+            Console.WriteLine("Harjoituspäivä + numero:");
+            Console.WriteLine("Harjoitteet:");
             Console.ReadKey();
         }
     }

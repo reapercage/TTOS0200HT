@@ -16,6 +16,7 @@ namespace PTDECon
         private List<bool[]> harjoituspäivät;
         public List<Harjoite> harjoitteet;
         private int sarjaNroTemp = 0;
+        private bool aktiivinen;
         //public void reset
         public Harjoitusohjelma()
         {
@@ -49,6 +50,17 @@ namespace PTDECon
             set
             {
                 monijakoinen = value;
+            }
+        }
+        public bool Aktiivinen
+        {
+            get
+            {
+                return aktiivinen;
+            }
+            set
+            {
+                aktiivinen = value;
             }
         }
         public void Aloituspäivä()
@@ -112,7 +124,9 @@ namespace PTDECon
                 Console.WriteLine();
                 Console.WriteLine("Lähtöpainot: " + h.Lahtopainot);
                 Console.WriteLine("Sarjojen lukumäärä: " + h.MontaSarjaa);
-                foreach(Sarja s in h.sarjat)
+                Console.WriteLine("Automaattinen painojen muutos / sarja: [ ]");
+                Console.WriteLine("Automaattinen painojen muutos / päivä: [ ]");
+                foreach (Sarja s in h.sarjat)
                 {
                     Console.WriteLine("Sarja " + sarjaNroTemp + ":");
                     Console.WriteLine("Painot: " + s.Painot

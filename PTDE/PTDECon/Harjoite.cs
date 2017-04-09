@@ -17,6 +17,7 @@ namespace PTDECon
         private bool autoPainojenMuutosSarja;
         private double painojenMuutosD;
         private double painojenMuutosSarja;
+        private bool autoMuutosSarja;
         private int montaSarjaa;
         public List<Sarja> sarjat;
         private int index;
@@ -55,17 +56,6 @@ namespace PTDECon
                 montaSarjaa = value;
             }
         }
-        public double Lahtopainot
-        {
-            get
-            {
-                return lahtopainot;
-            }
-            set
-            {
-                lahtopainot = value;
-            }
-        }
         public bool TarkistaOnkoHp(int index)
         {
             return jako[index];
@@ -81,28 +71,6 @@ namespace PTDECon
         public void PoistaHarjoitusjako(int index)
         {
             jako[index] = false;
-        }
-        public double PainojenmuutosPerD
-        {
-            get
-            {
-                return painojenMuutosD;
-            }
-            set
-            {
-                painojenMuutosD = value;
-            }
-        }
-        public double PainojenmuutosPerSarja
-        {
-            get
-            {
-                return painojenMuutosSarja;
-            }
-            set
-            {
-                painojenMuutosSarja = value;
-            }
         }
         //public void reset
         //muuta sarjojen painoja
@@ -154,14 +122,56 @@ namespace PTDECon
 
             }
         }
+        public double Lahtopainot
+        {
+            get
+            {
+                return lahtopainot;
+            }
+            set
+            {
+                lahtopainot = value;
+            }
+        }
+        public void LahtopainoCheck()
+        {
+
+        }
+        public double PainojenmuutosPerD
+        {
+            get
+            {
+                return painojenMuutosD;
+            }
+            set
+            {
+                painojenMuutosD = value;
+            }
+        }
+        public double PainojenmuutosPerSarja
+        {
+            get
+            {
+                return painojenMuutosSarja;
+            }
+            set
+            {
+                painojenMuutosSarja = value;
+            }
+        }
+        //Sarjojen painojen muutos aiemman sarjan perusteella
+
         public void MuutaSarjaPainot(int index, double painot)
         {
             sarjat[index].Painot = painot;
+            if (index == 0) lahtopainot = painot;
+            if (index > 0) autoMuutosSarja = false;
         }
         public void MuutaSarjaToistot(int index, int toistot)
         {
             sarjat[index].Toistot = toistot;
         }
+        //hpäivä 2 korotetuilla painoilla
     }
     //wpf lista painojen korotuksista ja toistoista, oma luokka?
     class Sarja
