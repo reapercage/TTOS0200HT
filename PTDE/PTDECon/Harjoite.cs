@@ -11,12 +11,14 @@ namespace PTDECon
     {
         private string nimi;
         private int paivacounter;
+        private bool aktiivinen;
         private bool[] jako;
         private double lahtopainot;
         private bool autoPainojenMuutosD;
         private bool autoPainojenMuutosSarja;
         private double painojenMuutosD;
         private double painojenMuutosSarja;
+        private double painojenMuutosSarjaTemp;
         private bool autoMuutosSarja;
         private int montaSarjaa;
         public List<Sarja> sarjat;
@@ -45,6 +47,7 @@ namespace PTDECon
                 nimi = value;
             }
         }
+        public bool Aktiivinen { get; set; }
         public int MontaSarjaa
         {
             get
@@ -137,6 +140,30 @@ namespace PTDECon
         {
 
         }
+        public double PainojenmuutosPerSarja
+        {
+            get
+            {
+                return painojenMuutosSarja;
+            }
+            set
+            {
+                painojenMuutosSarjaTemp = painojenMuutosSarja;
+                painojenMuutosSarja = value;
+            }
+        }
+        //Sarjojen painojen muutos aiemman sarjan perusteella
+        public int Paivacounter
+        {
+            get
+            {
+                return paivacounter;
+            }
+            set
+            {
+                paivacounter = Paivacounter;
+            }
+        }
         public double PainojenmuutosPerD
         {
             get
@@ -148,30 +175,63 @@ namespace PTDECon
                 painojenMuutosD = value;
             }
         }
-        public double PainojenmuutosPerSarja
+        public void PainoCheck(int trainingday)
         {
-            get
+            foreach (Sarja s in sarjat)
             {
-                return painojenMuutosSarja;
-            }
-            set
-            {
-                painojenMuutosSarja = value;
+                for(int i = 0; i < sarjat.Count; i++)
+                {
+                    MuutaSarjaPainot(i, lahtopainot + painojenMuutosD * trainingday + i * painojenMuutosSarja);
+                }
             }
         }
-        //Sarjojen painojen muutos aiemman sarjan perusteella
-
         public void MuutaSarjaPainot(int index, double painot)
         {
             sarjat[index].Painot = painot;
-            if (index == 0) lahtopainot = painot;
+            //if (index == 0) lahtopainot = painot;
             if (index > 0) autoMuutosSarja = false;
+        }
+        //Toistot
+        private int lahtotoistot;
+        private int toistojenMuutosD;
+        private int toistojenMuutosSarja;
+        private int[] toistoMuutosSarjaTaulu;
+        public int Lahtotoistot
+        {
+            get
+            {
+                return lahtotoistot;
+            }
+            set
+            {
+                lahtotoistot = value;
+            }
+        }
+        public int ToistoMuutosSarja
+        {
+            get
+            {
+                return toistojenMuutosSarja;
+            }
+            set
+            {
+                toistojenMuutosSarja = value;
+            }
         }
         public void MuutaSarjaToistot(int index, int toistot)
         {
             sarjat[index].Toistot = toistot;
         }
-        //hpäivä 2 korotetuilla painoilla
+        public void ToistoCheck(int trainingday)
+        {
+            foreach (Sarja s in sarjat)
+            {
+                for (int i = 0; i < sarjat.Count; i++)
+                {
+                    MuutaSarjaToistot(i, lahtotoistot + toistojenMuutosD * trainingday + i * toistojenMuutosSarja);
+                }
+            }
+        }
     }
     //wpf lista painojen korotuksista ja toistoista, oma luokka?
     class Sarja

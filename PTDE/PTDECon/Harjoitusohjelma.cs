@@ -13,6 +13,8 @@ namespace PTDECon
         private int currentTrainingDay = 1;
         private int currentTrainingWeek = 1;
         private int monijakoinen;
+        private int monijakoinenOld;
+        private bool jakoisuudetErikseen;
         private List<bool[]> harjoituspäivät;
         public List<Harjoite> harjoitteet;
         private int sarjaNroTemp = 0;
@@ -41,17 +43,6 @@ namespace PTDECon
             }
         }
         //if monijakoinen = 3 => 1 : harjoite jako = 1, remember jako 3?
-        public int Monijakoinen
-        {
-            get
-            {
-                return monijakoinen;
-            }
-            set
-            {
-                monijakoinen = value;
-            }
-        }
         public bool Aktiivinen
         {
             get
@@ -99,6 +90,31 @@ namespace PTDECon
         {
             return harjoituspäivät[ind1][ind2];
         }
+        //Jakoisuus
+        public int Monijakoinen
+        {
+            get
+            {
+                return monijakoinen;
+            }
+            set
+            {
+                monijakoinenOld = monijakoinen;
+                monijakoinen = value;
+                if(monijakoinenOld != monijakoinen && jakoisuudetErikseen == false)
+                {
+                    JakoisuusCheck();
+                }
+            }
+        }
+        public void JakoisuusCheck()
+        {
+            for (int i = 0; i < harjoitteet.Count; i++)
+            {
+                harjoitteet[i].AsetaJakoisuus(monijakoinen);
+            }
+        }
+        public bool JakoisuudetErikseen { get; set; }
         //Harjoitteet
         //harjoitteiden selaus
         //tuple
@@ -124,8 +140,18 @@ namespace PTDECon
                 Console.WriteLine();
                 Console.WriteLine("Lähtöpainot: " + h.Lahtopainot);
                 Console.WriteLine("Sarjojen lukumäärä: " + h.MontaSarjaa);
-                Console.WriteLine("Automaattinen painojen muutos / sarja: [ ]");
-                Console.WriteLine("Automaattinen painojen muutos / päivä: [ ]");
+                Console.Write("Automaattinen painojen muutos / sarja: [");
+                if(h.PainojenmuutosPerSarja != 0)
+                {
+                    Console.Write(h.PainojenmuutosPerSarja);
+                }
+                Console.WriteLine(" ]");
+                Console.Write("Automaattinen painojen muutos / päivä: [");
+                if(h.PainojenmuutosPerD != 0)
+                {
+                    Console.Write(h.PainojenmuutosPerD);
+                }
+                Console.WriteLine(" ]");
                 foreach (Sarja s in h.sarjat)
                 {
                     Console.WriteLine("Sarja " + sarjaNroTemp + ":");
@@ -133,12 +159,14 @@ namespace PTDECon
                                         + " Toistot: " + s.Toistot);
                     sarjaNroTemp++;
                 }
+                Console.WriteLine();
             }
         }
         public void LisääHarjoite()
         {
             Harjoite harjoite = new Harjoite();
             harjoitteet.Add(harjoite);
+            harjoitteet[harjoitteet.Count - 1].AsetaJakoisuus(monijakoinen);
         }
         public void PoistaHarjoite(int index)
         {

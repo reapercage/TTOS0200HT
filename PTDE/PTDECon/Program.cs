@@ -30,22 +30,31 @@ namespace PTDECon
             hj1.harjoitteet[0].MontaSarjaa = 3;
             //Monta sarjaa Droplist2, toimii
             hj1.harjoitteet[0].TarkistaSarjaLkm(hj1.harjoitteet[0]);
+
+            //Poista harjoite
+            //Nollaa harjoitusohjelma tyhjäksi
+
             //Aseta ja poista harjoitusjako, toimii
             //Kun harjoitusohjelman jakoisuutta muutetaan, muuttuvat myös
             //harjoitteiden jakoisuudet
             //Aseta jakoisuus voidaan korvata myös bool[16]
             //ja jakoisuudet näkyvät ja ovat käytössä hj1.Monijakoinen mukaan
-            hj1.harjoitteet[0].AsetaJakoisuus(hj1.Monijakoinen);
-            hj1.harjoitteet[1].AsetaJakoisuus(hj1.Monijakoinen);
+            
+            //lisää harjoite jakoisuus check, (turha?)
+            hj1.JakoisuusCheck();
+            //Jakoisuudet erikseen kullekkin harjoitteelle?
+            //hj1.harjoitteet[0].AsetaJakoisuus(hj1.Monijakoinen);
+            //hj1.harjoitteet[1].AsetaJakoisuus(hj1.Monijakoinen);
+
+            //AsetaHarjoitusjako, toimii
             hj1.harjoitteet[0].AsetaHarjoitusjako(0);
             hj1.harjoitteet[0].AsetaHarjoitusjako(1);
+            //PoistaHarjoitusjako, toimii
             hj1.harjoitteet[0].PoistaHarjoitusjako(1);
             hj1.harjoitteet[1].AsetaHarjoitusjako(1);
-            //jakoisuus testi
-            hj1.Monijakoinen = 1;
+            //jakoisuutta muuttaessa pitäisi muistaa vanhat merkinnät?
+            //hj1.Monijakoinen = 1;
             //Harjoitus aktiivinen - ei ?
-            //Aseta lähtöpainot
-            hj1.harjoitteet[0].Lahtopainot = 10;
 
             //Aseta harjoituspäivä click toimii
             hj1.AsetaHarjoituspäivä(0, 0);
@@ -63,22 +72,38 @@ namespace PTDECon
             hj1.LisääHarjoitusviikko();
             //Poista harjoitusviikko toimii
             hj1.PoistaHarjoitusviikko(2);
+
             //method siirrä harjoituspäivä
             //Aseta aloituspäivä
-            //Aseta harjoituksen jakoisuus
-            //Auto_increase
-            //Muuta sarjojen toistoja
 
             //Asetetaan harjoitusohjelma aktiiviseksi
             hj1.Aktiivinen = true;
+            //Aseta lähtöpainot
+            hj1.harjoitteet[0].Lahtopainot = 10;
             //Muuta sarjojen painoja
-            hj1.harjoitteet[0].MuutaSarjaPainot(0, 10);
+            //hj1.harjoitteet[0].MuutaSarjaPainot(0, 10);
             //3 sarjaa tällä hetkellä
-            //Automaattinen painojen muutos per sarja
+            //Automaattinen painojen muutos per sarja, toimii
+            //custom painojen muutos algoritmi
             hj1.harjoitteet[0].PainojenmuutosPerSarja = 2.5;
-            //if painojenmuutospersarja has changed -->
-            hj1.harjoitteet[0].MuutaSarjaPainot(1, hj1.harjoitteet[0].sarjat[0].Painot
-                + hj1.harjoitteet[0].PainojenmuutosPerSarja);
+            //PainoCheck tarkastaa painot kullekkin harjoituspäivälle, toimii
+            hj1.harjoitteet[0].PainoCheck(0);
+            //Automaattinen painojen muutos pois, toimii
+            //hj1.harjoitteet[0].PainojenmuutosPerSarja = 0;
+            //hj1.harjoitteet[0].PainoCheck(0);
+            //Automaattinen painojenmuutos per päivä, toimii
+            hj1.harjoitteet[0].PainojenmuutosPerD = 2.5;
+            hj1.harjoitteet[0].PainoCheck(0);
+            //Painojenmuutos per päivä pois, toimii
+            hj1.harjoitteet[0].PainojenmuutosPerD = 0;
+            hj1.harjoitteet[0].PainoCheck(3);
+
+            //Muuta sarjojen toistoja
+            //Tallenna käsinsyötetyt toistomäärät sarjoille
+            hj1.harjoitteet[0].sarjat[0].Toistot = 10;
+            hj1.harjoitteet[0].sarjat[1].Toistot = 7;
+            hj1.harjoitteet[0].sarjat[2].Toistot = 5;
+            //Automaattinen toistojenmuutos per sarja
 
 
 
@@ -110,6 +135,8 @@ namespace PTDECon
             Console.WriteLine("Harjoituspäivä + numero:");
             Console.WriteLine("Harjoitteet:");
             Console.ReadKey();
+            //muuta tilapäisesti painoja/toistoja
+            //muuta pysyvästi painoja/toistoja
         }
     }
 }
