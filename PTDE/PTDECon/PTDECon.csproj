@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Harjoite.cs" />
     <Compile Include="Harjoitusohjelma.cs" />
+    <Compile Include="Harjoituspaiva.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

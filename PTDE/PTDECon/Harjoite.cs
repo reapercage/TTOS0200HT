@@ -12,7 +12,47 @@ namespace PTDECon
         private string nimi;
         private int paivacounter;
         private bool aktiivinen;
+        public bool Aktiivinen
+        {
+            get
+            {
+                return aktiivinen;
+            }
+            set
+            {
+                aktiivinen = value;
+            }
+        }
         private bool[] jako;
+        public bool[] Jako
+        {
+            get{ return jako; }
+        }
+        private bool osaHarjohj;
+        public bool OsaHarjohj
+        {
+            get
+            {
+                return osaHarjohj;
+            }
+            set
+            {
+                osaHarjohj = value;
+            }
+        }
+        private bool skip;
+        public bool Skip
+        {
+            get
+            {
+                return skip;
+            }
+            set
+            {
+                skip = value;
+            }
+        }
+
         private double lahtopainot;
         private bool autoPainojenMuutosD;
         private bool autoPainojenMuutosSarja;
@@ -47,7 +87,6 @@ namespace PTDECon
                 nimi = value;
             }
         }
-        public bool Aktiivinen { get; set; }
         public int MontaSarjaa
         {
             get

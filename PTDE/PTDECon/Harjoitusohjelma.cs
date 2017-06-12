@@ -17,6 +17,7 @@ namespace PTDECon
         private bool jakoisuudetErikseen;
         private List<bool[]> harjoituspäivät;
         public List<Harjoite> harjoitteet;
+        public List<Harjoituspaiva> Harjoituspaivat;
         private int sarjaNroTemp = 0;
         private bool aktiivinen;
         //public void reset
@@ -172,6 +173,10 @@ namespace PTDECon
         {
             if (harjoitteet.Count > 1)
                 harjoitteet.RemoveAt(index);
+        }
+        public void LisääHarjoituspäivä()
+        {
+
         }
     }
 }
