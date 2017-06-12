@@ -9,7 +9,18 @@ namespace PTDECon
     //harjoituskerta
     class Harjoite
     {
-        private string nimi;
+        private int nimi;
+        public int Nimi
+        {
+            get
+            {
+                return nimi;
+            }
+            set
+            {
+                nimi = value;
+            }
+        }
         private int paivacounter;
         private bool aktiivinen;
         public bool Aktiivinen
@@ -74,18 +85,6 @@ namespace PTDECon
             montaSarjaa = 0;
             sarjat = new List<Sarja>();
             LisaaSarja();
-        }
-        //harjoitteen nimi listasta tai custom
-        public string Nimi
-        {
-            get
-            {
-                return nimi;
-            }
-            set
-            {
-                nimi = value;
-            }
         }
         public int MontaSarjaa
         {

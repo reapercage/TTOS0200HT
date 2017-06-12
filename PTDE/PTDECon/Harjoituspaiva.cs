@@ -9,6 +9,17 @@ namespace PTDECon
     class Harjoituspaiva
     {
         private DateTime pvm;
+        public DateTime Pvm
+        {
+            get
+            {
+                return pvm;
+            }
+            set
+            {
+                pvm = value;
+            }
+        }
         private int jakopv;
         public List<Harjoite> HpHarjoitteet;
 

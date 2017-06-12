@@ -8,7 +8,7 @@ namespace PTDECon
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main1(string[] args)
         {
             bool[] hp = new bool[7];
             Harjoitusohjelma hj1 = new Harjoitusohjelma();
