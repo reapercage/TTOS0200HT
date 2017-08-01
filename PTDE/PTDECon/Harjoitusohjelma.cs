@@ -188,7 +188,7 @@ namespace PTDECon
                     Console.Write(h.PainojenmuutosPerD);
                 }
                 Console.WriteLine(" ]");
-                foreach (Sarja s in h.sarjat)
+                foreach (Sarja s in h.Sarjat)
                 {
                     Console.WriteLine("Sarja " + sarjaNroTemp + ":");
                     Console.WriteLine("Painot: " + s.Painot
@@ -212,6 +212,10 @@ namespace PTDECon
         public void LisääHarjoituspäivä(Harjoituspaiva hp)
         {
             Harjoituspaivat.Add(hp);
+        }
+        public void PoistaHarjoituspäivä(int index)
+        {
+            Harjoituspaivat.RemoveAt(index);
         }
     }
 }

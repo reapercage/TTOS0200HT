@@ -72,7 +72,7 @@ namespace PTDECon
         private double painojenMuutosSarjaTemp;
         private bool autoMuutosSarja;
         private int montaSarjaa;
-        public List<Sarja> sarjat;
+        public List<Sarja> Sarjat;
         private int index;
 
         public Harjoite()
@@ -83,8 +83,8 @@ namespace PTDECon
             painojenMuutosD = 0;
             painojenMuutosSarja = 0;
             montaSarjaa = 0;
-            sarjat = new List<Sarja>();
-            LisaaSarja();
+            Sarjat = new List<Sarja>();
+            //LisaaSarja();
         }
         public int MontaSarjaa
         {
@@ -124,39 +124,47 @@ namespace PTDECon
         public void LisaaSarja()
         {
             Sarja srj = new Sarja();
-            sarjat.Add(srj);
+            Sarjat.Add(srj);
+            montaSarjaa++;
+        }
+        public void LisaaSarjaAiemmanPohjalta()
+        {
+            Sarja srj = new Sarja();
+            srj.Toistot = Sarjat[Sarjat.Count() - 1].Toistot;
+            srj.Painot = Sarjat[Sarjat.Count() - 1].Painot;
+            Sarjat.Add(srj);
             montaSarjaa++;
         }
         public void PoistaSarja(int index, bool laskuri)
         {
-            if(sarjat.Count > 1)
+            if(Sarjat.Count > 1)
             {
-                sarjat.RemoveAt(index);
+                Sarjat.RemoveAt(index);
                 if(laskuri == false) montaSarjaa--;
             }
             //if vain yksi sarja, ei edes poista painiketta
         }
         public int LaskeSarjat()
         {
-            return sarjat.Count;
+            return Sarjat.Count;
         }
         public void TarkistaSarjaLkm(Harjoite hrj)
         {
-            if (hrj.MontaSarjaa > hrj.sarjat.Count)
+            if (hrj.MontaSarjaa > hrj.Sarjat.Count)
             {
-                for (int i = 0; i < hrj.MontaSarjaa - hrj.sarjat.Count; i++)
+                for (int i = 0; i < hrj.MontaSarjaa - hrj.Sarjat.Count; i++)
                 {
                     hrj.LisaaSarja();
                     hrj.montaSarjaa--;
                 }
                 //tallenna johonkin väliaikaisesti
             }
-            else if (hrj.MontaSarjaa < hrj.sarjat.Count)
+            else if (hrj.MontaSarjaa < hrj.Sarjat.Count)
             {
                 //tallenna johonkin väliaikaisesti ennen poistoa
                 //oldSarjat = currentSarjat
                 //jonka jälkeen
-                for (int i = hrj.sarjat.Count; i > hrj.MontaSarjaa; i--)
+                for (int i = hrj.Sarjat.Count; i > hrj.MontaSarjaa; i--)
                 {
                     hrj.PoistaSarja(i - 1, true);
                 }
@@ -215,9 +223,9 @@ namespace PTDECon
         }
         public void PainoCheck(int trainingday)
         {
-            foreach (Sarja s in sarjat)
+            foreach (Sarja s in Sarjat)
             {
-                for(int i = 0; i < sarjat.Count; i++)
+                for(int i = 0; i < Sarjat.Count; i++)
                 {
                     MuutaSarjaPainot(i, lahtopainot + painojenMuutosD * trainingday + i * painojenMuutosSarja);
                 }
@@ -225,7 +233,7 @@ namespace PTDECon
         }
         public void MuutaSarjaPainot(int index, double painot)
         {
-            sarjat[index].Painot = painot;
+            Sarjat[index].Painot = painot;
             //if (index == 0) lahtopainot = painot;
             if (index > 0) autoMuutosSarja = false;
         }
@@ -258,13 +266,13 @@ namespace PTDECon
         }
         public void MuutaSarjaToistot(int index, int toistot)
         {
-            sarjat[index].Toistot = toistot;
+            Sarjat[index].Toistot = toistot;
         }
         public void ToistoCheck(int trainingday)
         {
-            foreach (Sarja s in sarjat)
+            foreach (Sarja s in Sarjat)
             {
-                for (int i = 0; i < sarjat.Count; i++)
+                for (int i = 0; i < Sarjat.Count; i++)
                 {
                     MuutaSarjaToistot(i, lahtotoistot + toistojenMuutosD * trainingday + i * toistojenMuutosSarja);
                 }
@@ -280,7 +288,7 @@ namespace PTDECon
         public Sarja()
         {
             painot = 0;
-            toistot = 1;
+            toistot = 0;
         }
         public double Painot
         {
@@ -311,7 +319,7 @@ namespace PTDECon
     }
     class HarjoiteNimi
     {
-        public string[] harjoitukset = new string[]
+        public readonly string[] Harjoitukset = new string[]
             { "Penkkipunnerrus", "Maastaveto", "Rinnalleveto",
             "Pystypunnerrus", "Ylätalja", "Alatalja",
             "Vatsalihakset", "Vatsalihaslaite", "Selkälihakset",
@@ -319,5 +327,9 @@ namespace PTDECon
             "Käsipainot - hauis", "Käsipainot - hauiskääntö",
             "Käsipainot - pystypunnerrus", "Käsipainot - veto",
             "Tanko - hauikset", "Leukojenveto", "Custom" };
+        public HarjoiteNimi()
+        {
+
+        }
     }
 }

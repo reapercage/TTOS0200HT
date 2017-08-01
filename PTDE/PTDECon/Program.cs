@@ -26,7 +26,7 @@ namespace PTDECon
             //Monta sarjaa Droplist, toimii
             hj1.harjoitteet[0].MontaSarjaa = 3;
             //Poista sarja, toimii
-            hj1.harjoitteet[0].PoistaSarja(hj1.harjoitteet[0].sarjat.Count - 1, false);
+            hj1.harjoitteet[0].PoistaSarja(hj1.harjoitteet[0].Sarjat.Count - 1, false);
             hj1.harjoitteet[0].MontaSarjaa = 3;
             //Monta sarjaa Droplist2, toimii
             hj1.harjoitteet[0].TarkistaSarjaLkm(hj1.harjoitteet[0]);
@@ -100,9 +100,9 @@ namespace PTDECon
 
             //Muuta sarjojen toistoja
             //Tallenna käsinsyötetyt toistomäärät sarjoille
-            hj1.harjoitteet[0].sarjat[0].Toistot = 10;
-            hj1.harjoitteet[0].sarjat[1].Toistot = 7;
-            hj1.harjoitteet[0].sarjat[2].Toistot = 5;
+            hj1.harjoitteet[0].Sarjat[0].Toistot = 10;
+            hj1.harjoitteet[0].Sarjat[1].Toistot = 7;
+            hj1.harjoitteet[0].Sarjat[2].Toistot = 5;
             //Automaattinen toistojenmuutos per sarja
 
 
