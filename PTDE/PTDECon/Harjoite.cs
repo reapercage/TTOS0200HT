@@ -85,6 +85,7 @@ namespace PTDECon
             montaSarjaa = 0;
             Sarjat = new List<Sarja>();
             //LisaaSarja();
+            nimi = 19;
         }
         public int MontaSarjaa
         {
@@ -326,7 +327,7 @@ namespace PTDECon
             "Soutulaite", "Reisilihaslaite", "Kääntölaite",
             "Käsipainot - hauis", "Käsipainot - hauiskääntö",
             "Käsipainot - pystypunnerrus", "Käsipainot - veto",
-            "Tanko - hauikset", "Leukojenveto", "Custom" };
+            "Tanko - hauikset", "Leukojenveto", "Custom", "--" };
         public HarjoiteNimi()
         {
 

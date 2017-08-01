@@ -82,18 +82,20 @@ namespace PTDECon
             Console.WriteLine("Harjoituspäivä ");
             //harjoituspäivän jakosysteemi ratkaisematta
             Harjoituspaiva hp1 = new Harjoituspaiva(1, hj1);
-            DateTime hppvm = new DateTime(2017, 6, 19);
+            //DateTime hppvm = new DateTime(2017, 6, 19);
+            DateTime hppvm = DateTime.Today;
             hp1.Pvm = hppvm;
             Console.WriteLine(hp1.Pvm.ToString("dd. MMMM yyyy\n------------------"));
-            //hp1.LisaaHarjoite();
             hp1.HpHarjoitteet[0].LisaaSarja();
             hp1.HpHarjoitteet[0].Sarjat[0].Painot = 20;
             hp1.HpHarjoitteet[0].Sarjat[0].Toistot = 10;
             hp1.HpHarjoitteet[0].LisaaSarjaAiemmanPohjalta();
 
-            hp1.NäytäHarjoitteet();
+            hp1.LisaaHarjoite();
+            //lisää vain tälle päivälle / pysyvästi
 
-            Console.WriteLine("Toimii!");
+            hp1.NäytäHarjoitteet();
+            
             Console.ReadKey();
         }
     }
